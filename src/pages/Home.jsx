@@ -7,13 +7,9 @@ import Footer from "../components/layout/Footer"
 const Home = () => {
   return (
     <div>
-      Header
       <Header />
-      Speciailty Menu
       <SpecialityMenu />
-      Top Doctor
       <TopDoctor />
-      Banner 
       <Banner />
     </div>
   )
