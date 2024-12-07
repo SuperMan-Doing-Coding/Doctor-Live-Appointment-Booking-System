@@ -1,34 +1,24 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, MapPin, Filter, Search } from 'lucide-react';
+import { doctors } from '../assets/assets'; // Import the doctors data
 
 const MyAppointment = () => {
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Dummy data - replace with your actual appointments data
-  const appointments = [
-    {
-      id: 1,
-      doctorName: "Dr. Emily Rodriguez",
-      doctorImage: "https://example.com/doctor1.jpg",
-      speciality: "Cardiologist",
-      date: "2024-03-20",
-      time: "10:30 AM",
-      location: "Medical Center, Room 204",
-      status: "upcoming",
-    },
-    {
-      id: 2,
-      doctorName: "Dr. Michael Chen",
-      doctorImage: "https://example.com/doctor2.jpg",
-      speciality: "Neurologist",
-      date: "2024-03-15",
-      time: "2:00 PM",
-      location: "Health Plaza, Wing B",
-      status: "completed",
-    },
-    // Add more appointments as needed
-  ];
+  // Create appointments using doctors data
+  const appointments = doctors.map((doctor, index) => ({
+    id: doctor.id || index + 1,
+    doctorName: doctor.name,
+    doctorImage: doctor.image,
+    speciality: doctor.speciality,
+    date: "2024-03-20", // You can randomize these dates if needed
+    time: "10:30 AM",
+    location: doctor.hospital || "Medical Center",
+    status: index % 2 === 0 ? 'upcoming' : 'completed', // Alternating status for demo
+    fees: doctor.fees,
+    experience: doctor.experience
+  }));
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -107,14 +97,16 @@ const MyAppointment = () => {
                     src={appointment.doctorImage}
                     alt={appointment.doctorName}
                     className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.src = 'https://via.placeholder.com/150';
-                    }}
                   />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900">{appointment.doctorName}</h3>
                   <p className="text-gray-600">{appointment.speciality}</p>
+                  <div className="mt-1 text-sm text-gray-500">
+                    <span>Experience: {appointment.experience} years</span>
+                    <span className="mx-2">•</span>
+                    <span>Fees: ₹{appointment.fees}</span>
+                  </div>
                 </div>
               </div>
 

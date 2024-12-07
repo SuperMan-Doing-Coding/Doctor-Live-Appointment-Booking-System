@@ -33,14 +33,26 @@ const Navbar = () => {
 
   const handleLoginToggle = () => setIsLoggedIn(!isLoggedIn);
 
+  // Internal NavLink component
+  const NavLink = ({ href, icon, text }) => (
+    <Link
+      to={href}
+      className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50"
+    >
+      <span className="mr-2">{icon}</span>
+      {text}
+    </Link>
+  );
+
+  // Internal MobileNavLink component
   const MobileNavLink = ({ href, icon, text }) => (
-    <a
-      href={href}
+    <Link
+      to={href}
       className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50"
     >
       <span className="mr-2">{icon}</span>
       {text}
-    </a>
+    </Link>
   );
 
   return (
@@ -139,7 +151,7 @@ const Navbar = () => {
             {isLoggedIn && (
               <div className="flex items-center px-3 py-2 border-b border-gray-200 mb-2">
                 <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  src={doc13}
                   alt="User profile"
                   className="h-8 w-8 rounded-full object-cover mr-2"
                 />
@@ -154,12 +166,12 @@ const Navbar = () => {
             {isLoggedIn ? (
               <>
                 <MobileNavLink
-                  href="/profile"
+                  href="/my-profile"
                   icon={<User size={18} />}
                   text="My Profile"
                 />
                 <MobileNavLink
-                  href="/appointments"
+                  href="/my-appointment"
                   icon={<Calendar size={18} />}
                   text="My Appointments"
                 />
@@ -172,7 +184,10 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              <button className="w-full mt-2 flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md">
+              <button
+                onClick={handleLoginToggle}
+                className="w-full mt-2 flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md"
+              >
                 <UserPlus size={18} className="mr-2" />
                 Create Account
               </button>
@@ -183,15 +198,5 @@ const Navbar = () => {
     </nav>
   );
 };
-
-const NavLink = ({ href, icon, text }) => (
-  <Link
-    to={href}
-    className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50"
-  >
-    <span className="mr-2">{icon}</span>
-    {text}
-  </Link>
-);
 
 export default Navbar;

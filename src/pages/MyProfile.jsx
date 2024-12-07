@@ -11,15 +11,15 @@ import {
   AlertCircle,
   Clock
 } from 'lucide-react';
-import person from '../assets/pexels-kebs-visuals-742415-3992656.jpg';
+import Paitent from '../assets/pexels-kebs-visuals-742415-3992656.jpg';
 
 const MyProfile = () => {
   const [activeTab, setActiveTab] = useState('profile');
   
   // Dummy patient data - replace with actual patient data
   const patientData = {
-    name: "Mandy Doe",
-    email: "mandy.doe@example.com",
+    name: "John Doe",
+    email: "john.doe@example.com",
     phone: "+91 9876543210",
     address: "123 Main Street, City",
     dateOfBirth: "15-05-1990",
@@ -32,7 +32,7 @@ const MyProfile = () => {
       relation: "Spouse",
       phone: "+91 9876543211"
     },
-    profileImage: person
+    profileImage: Paitent
   };
 
   return (
